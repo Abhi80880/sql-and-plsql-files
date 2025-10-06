@@ -1,0 +1,10 @@
+SELECT 'alter system kill session '''|| s.sid|| ','|| s.serial#|| ''' immediate;' kill_sid
+FROM dba_lock_internal l,
+v$session s
+WHERE s.sid = l.session_id
+AND UPPER(l.lock_id1) LIKE '%WEO_MOT_UTIL%'
+AND l.lock_type = 'Body Definition Lock';
+
+SELECT 'ALTER SYSTEM KILL SESSION '''||sid||','||serial#||''' IMMEDIATE;' FROM v$session
+where username is not null and status = 'ACTIVE' and 
+osuser<>(select sys_context('USERENV','OS_USER') from dual);

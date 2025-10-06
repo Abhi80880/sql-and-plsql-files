@@ -1,0 +1,19 @@
+with BJAZ_TVS_DATA_tmp(pono,count,month) as
+(SELECT 'proposal count',COUNT(PONO) ,TO_CHAR(proposal_start_date,'MON') from BJAZ_TVS_DATA GROUP BY TO_CHAR(proposal_start_date,'MM'),TO_CHAR(proposal_start_date,'MON') ORDER BY TO_CHAR(proposal_start_date,'MM'))
+select * from BJAZ_TVS_DATA_tmp
+pivot
+(max(count) for month in (
+'JAN' "JAN",
+'FEB' "FEB",
+'MAR' "MAR",
+'APR' "APR",
+'MAY' "MAY",
+'JUN' "JUN",
+'JUL' "JUL",
+'AUG' "AUG",
+'SEP' "SEP",
+'OCT' "OCT",
+'NOV' "NOV",
+'DEC' "DEC"));
+
+SELECT COUNT(PONO),TO_CHAR(proposal_start_date,'MON') from BJAZ_TVS_DATA GROUP BY TO_CHAR(proposal_start_date,'MON') ORDER BY TO_CHAR(proposal_start_date,'MON');

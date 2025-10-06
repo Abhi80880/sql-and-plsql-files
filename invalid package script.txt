@@ -1,0 +1,1 @@
+select 'ALTER PACKAGE '||OBJECT_NAME||' COMPILE BODY;' from user_objects where OBJECT_TYPE='PACKAGE BODY' and status='INVALID';
