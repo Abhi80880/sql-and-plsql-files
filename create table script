@@ -1,0 +1,336 @@
+create table------------------------------------------------------------------------------------------------------------------------------
+-- Create table
+create table BJAZ_HERO_WS_DATA
+(
+  proposalno                   VARCHAR2(50) not null,
+  proposalid                   VARCHAR2(50) not null,
+  cp_code                      VARCHAR2(12),
+  tp_policy_effective_date     DATE,
+  tp_policy_expiry_date        DATE,
+  od_policy_effective_date     DATE,
+  od_policy_expiry_date        DATE,
+  old_policy_no                VARCHAR2(50),
+  proposal_date                DATE,
+  proposal_time                VARCHAR2(50),
+  policy_type                  VARCHAR2(50),
+  payment_mode                 VARCHAR2(20),
+  payment_mode_id              VARCHAR2(20),
+  financer_id                  VARCHAR2(20),
+  aggrement_type_name          VARCHAR2(50),
+  bank_id                      VARCHAR2(50),
+  bankcity                     VARCHAR2(50),
+  premium_amount               NUMBER,
+  policy_submit_date           DATE,
+  tarrif_zone                  VARCHAR2(10) not null,
+  vehicle_class                VARCHAR2(1) not null,
+  fkmodel_id                   VARCHAR2(50),
+  manufacture_year             NUMBER(4) not null,
+  vehicle_registration_no      VARCHAR2(30),
+  frame_no                     VARCHAR2(50),
+  engine_no                    VARCHAR2(50),
+  cubiccapacity                NUMBER not null,
+  seatingcapacity              NUMBER not null,
+  fuel_type                    VARCHAR2(20) not null,
+  date_of_first_sale           DATE,
+  rto_id                       VARCHAR2(20),
+  compulsoryexcess             NUMBER,
+  exshowroom_price             NUMBER not null,
+  basic_idv                    NUMBER not null,
+  idv_tenure1                  NUMBER not null,
+  idv_tenure2                  NUMBER,
+  idv_tenure3                  NUMBER,
+  idv_tenure4                  NUMBER,
+  idv_tenure5                  NUMBER,
+  bifuel_idv                   NUMBER,
+  electricalaccessoriesidv     NUMBER,
+  nonelectricalaccessoriesidv  NUMBER,
+  total_vehicle_idv            NUMBER,
+  vehiclebasic_od_prem         NUMBER not null,
+  od_discount_per              NUMBER not null,
+  od_discount_amt              NUMBER not null,
+  electricalaccessoriespremium NUMBER not null,
+  nonelectricalaccpremium      NUMBER,
+  extra_prem_geographic_extod  NUMBER,
+  discount_handicaped          NUMBER,
+  ncb_percentage               NUMBER not null,
+  ncb_discount                 NUMBER not null,
+  net_od_premiuma              NUMBER not null,
+  basic_tp_premium             NUMBER not null,
+  bifuel_tp                    NUMBER not null,
+  tppd_discount                NUMBER not null,
+  tppd_suminsured              NUMBER,
+  extra_prem_geographic_exttp  NUMBER,
+  pa_owner_driver              NUMBER,
+  pa_perlicensedpassanger      NUMBER,
+  last_uploaddate              DATE default sysdate,
+  bjaz_loc_code                VARCHAR2(100),
+  bjaz_partner_id              VARCHAR2(100),
+  bjaz_premium                 VARCHAR2(100),
+  bjaz_receipt                 VARCHAR2(100),
+  bjaz_veh_code                VARCHAR2(100),
+  bjazpolicyno                 VARCHAR2(100),
+  scrutiny_no                  VARCHAR2(100),
+  error_desc                   VARCHAR2(400),
+  error_code                   NUMBER,
+  processed                    VARCHAR2(1),
+  paymentmode                  VARCHAR2(10),
+  reconciledchequeno           VARCHAR2(50),
+  reconciledchequedate         VARCHAR2(50),
+  reconciledchequebank         VARCHAR2(50),
+  reconciledchequebranch       VARCHAR2(50),
+  reconciledchequeamount       VARCHAR2(50),
+  reconciledchequeissuedby     VARCHAR2(50),
+  payinslipno                  VARCHAR2(50),
+  payinslipdate                VARCHAR2(50),
+  record_date                  DATE default sysdate,
+  visofnumber                  VARCHAR2(200),
+  isekycdone                   VARCHAR2(30),
+  ckycnumber                   VARCHAR2(30),
+  primaryovdtype               VARCHAR2(30),
+  primaryovdid                 VARCHAR2(30),
+  ovdimageurl                  VARCHAR2(500),
+  name                         VARCHAR2(100),
+  dob                          VARCHAR2(10),
+  ovdaddress                   VARCHAR2(350),
+  emailaddress                 VARCHAR2(50),
+  secondaryovdtype             VARCHAR2(30),
+  secondaryovdid               VARCHAR2(30),
+  secondaryovdidfrontimage     CLOB,
+  secondaryovdidbackimage      CLOB,
+  declarationconsent           VARCHAR2(30),
+  pepstatus                    VARCHAR2(30),
+  proposalnumberkyc            VARCHAR2(50),
+  partnerrefnumber             VARCHAR2(50),
+  additonalfield1              VARCHAR2(50),
+  additonalfield2              VARCHAR2(50),
+  username                     VARCHAR2(2000),
+  status_64vb                  VARCHAR2(10),
+  status_64vb_desc             VARCHAR2(200),
+  status_64vb_clearat          VARCHAR2(200),
+  reconciledchequedate64vb     VARCHAR2(100)
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate indexes 
+create index BJAZ_HERO_WS_DATA_RECORD_DAT on BJAZ_HERO_WS_DATA (RECORD_DATE)
+  tablespace BAGIC_IDX3
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create index BJAZ_HERO_WS_RECORD_DATE_IND on BJAZ_HERO_WS_DATA (TRUNC(RECORD_DATE))
+  tablespace BAGIC_IDX1
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+create unique index BJAZ_NEWHERO_POLICYNUMBER on BJAZ_HERO_WS_DATA (PROPOSALNO)
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table BJAZ_HERO_WS_DATA
+  add constraint BJAZ_NEWHERO_POLNUM primary key (PROPOSALNO);
+-- Grant/Revoke object privileges 
+grant select, insert, update on BJAZ_HERO_WS_DATA to DB_SCRIPT;
+grant select, insert, update on BJAZ_HERO_WS_DATA to DB_SCRIPTS;
+grant select on BJAZ_HERO_WS_DATA to DWH_SYNC;
+grant select, insert, update, delete on BJAZ_HERO_WS_DATA to EXTERNAL_GIOS_USER;
+grant select, insert, update, delete on BJAZ_HERO_WS_DATA to GENERAL_OPUS_USER;
+grant select on BJAZ_HERO_WS_DATA to IT_TEAM;
+grant select, insert, update, delete on BJAZ_HERO_WS_DATA to IT_TEAM_DB;
+
+
+
+
+
+
+create table------------------------------------------------------------------------------------------------------------------------------
+-- Create table
+create table BJAZ_LEXUS_WS_DATA
+(
+  inspolicytype                VARCHAR2(1),
+  inspolicyno                  VARCHAR2(50),
+  inspolicyissuingdealercode   VARCHAR2(10),
+  inspolicycreateddate         VARCHAR2(100),
+  inspolicycreatedtime         VARCHAR2(100),
+  inspolicyeffectivedate       VARCHAR2(100),
+  inspolicyeffectivetime       VARCHAR2(100),
+  inspolicyexpirydate          VARCHAR2(100),
+  proposaldate                 VARCHAR2(100),
+  proposaltime                 VARCHAR2(100),
+  proposertype                 VARCHAR2(1),
+  transactionid                VARCHAR2(20) not null,
+  salutation                   VARCHAR2(5),
+  firstname                    VARCHAR2(50),
+  middlename                   VARCHAR2(50),
+  lastname                     VARCHAR2(50),
+  companyname                  VARCHAR2(200),
+  gender                       VARCHAR2(1),
+  dateofbirth                  VARCHAR2(100),
+  occupation                   VARCHAR2(50),
+  address1                     VARCHAR2(50),
+  address2                     VARCHAR2(50),
+  address3                     VARCHAR2(50),
+  citycode                     NUMBER,
+  statecode                    NUMBER,
+  pincode                      VARCHAR2(6),
+  email                        VARCHAR2(50),
+  vehicleclass                 VARCHAR2(1),
+  vehicleinvoicedate           VARCHAR2(100),
+  vehiclemake                  VARCHAR2(100),
+  modelcode                    NUMBER,
+  variantcode                  NUMBER,
+  engineno                     VARCHAR2(25),
+  chassisno                    VARCHAR2(25),
+  cc                           NUMBER,
+  yearofmanufacture            VARCHAR2(4),
+  registrationno               VARCHAR2(25),
+  rtocode                      NUMBER,
+  iscsd                        NUMBER,
+  vehicleexshowroomprice       NUMBER(38),
+  vehicleexshowroomprice_year2 NUMBER(38),
+  vehicleexshowroomprice_year3 NUMBER(38),
+  vehicleidv                   NUMBER,
+  vehicleidv_year2             NUMBER,
+  vehicleidv_year3             NUMBER,
+  nonelectricaccexshowroom     NUMBER,
+  nonelectricaccidv            NUMBER,
+  nonelectricaccpremium        NUMBER,
+  electricaccexshowroom        NUMBER,
+  electricaccidv               NUMBER,
+  electricaccpremium           NUMBER,
+  bifuelkitvalue               NUMBER,
+  bifuelkitidv                 NUMBER,
+  bifueltppremium              NUMBER,
+  bifuelkitpremium             NUMBER,
+  nonelectricaccidv2           NUMBER,
+  nonelectricaccpremium2       NUMBER,
+  electricaccidv2              NUMBER,
+  electricaccpremium2          NUMBER,
+  bifuelkitpremium2            NUMBER,
+  bifuelkitidv2                NUMBER,
+  nonelectricaccidv3           NUMBER,
+  nonelectricaccpremium3       NUMBER,
+  electricaccidv3              NUMBER,
+  electricaccpremium3          NUMBER,
+  bifuelkitpremium3            NUMBER,
+  bifuelkitidv3                NUMBER,
+  seatingcapacity              NUMBER,
+  isbangladeshcovered          NUMBER,
+  isbhutancovered              NUMBER,
+  ismaldivescovered            NUMBER,
+  isnepalcovered               NUMBER,
+  ispakistancovered            NUMBER,
+  issrilankacovered            NUMBER,
+  geographicextnpremiumod      NUMBER,
+  geographicextnpremiumtp      NUMBER,
+  financercode                 NUMBER,
+  financerbranch               VARCHAR2(100),
+  aggrementtype                VARCHAR2(25),
+  compdeductibles              NUMBER,
+  basicodp                     NUMBER,
+  basicodp_year2               NUMBER,
+  basicodp_year3               NUMBER,
+  voluntarydeductible          NUMBER,
+  voluntarydisc                NUMBER,
+  isaamembership               NUMBER,
+  aamemno                      VARCHAR2(25),
+  aadiscamount                 NUMBER,
+  aaexpiryperiod               VARCHAR2(6),
+  isantitheftattached          NUMBER,
+  antitheftdiscamount          NUMBER,
+  ncbflag                      NUMBER,
+  ncbper                       VARCHAR2(5),
+  ncbamount                    NUMBER,
+  addonnildepamt               NUMBER,
+  addonperbelongingamt         NUMBER,
+  addonkeylossamt              NUMBER,
+  addonengineprotectamt        NUMBER,
+  addontyrealloyamt            NUMBER,
+  addonsportsequipmentamt      NUMBER,
+  last_uploaddate              DATE default sysdate,
+  bjaz_loc_code                VARCHAR2(100),
+  bjaz_partner_id              VARCHAR2(100),
+  bjaz_premium                 VARCHAR2(100),
+  bjaz_receipt                 VARCHAR2(100),
+  bjaz_veh_code                VARCHAR2(100),
+  bjazpolicyno                 VARCHAR2(100),
+  scrutiny_no                  VARCHAR2(100),
+  error_desc                   VARCHAR2(400),
+  error_code                   NUMBER,
+  processed                    VARCHAR2(1),
+  username                     VARCHAR2(2000),
+  blk_unblk_flag               VARCHAR2(10),
+  odterrif                     NUMBER,
+  tpterrif                     NUMBER,
+  product_code                 VARCHAR2(100),
+  odterrif_rate                NUMBER,
+  tpterrif_rate                NUMBER
+)
+tablespace BAGIC_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table BJAZ_LEXUS_WS_DATA
+  add primary key (TRANSACTIONID)
+  using index 
+  tablespace BAGIC_IDX1
+  pctfree 10
+  initrans 50
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Grant/Revoke object privileges 
+grant select, insert, update on BJAZ_LEXUS_WS_DATA to ALLIANZ;
+grant select, insert, update, delete on BJAZ_LEXUS_WS_DATA to ANONYMOUS;
+grant select, insert, update on BJAZ_LEXUS_WS_DATA to DB_SCRIPT;
+grant select on BJAZ_LEXUS_WS_DATA to DWH_SYNC;
+grant select, insert, update, delete on BJAZ_LEXUS_WS_DATA to EXTERNAL_GIOS_USER;
+grant select on BJAZ_LEXUS_WS_DATA to IT_TEAM;
+grant select, insert, update, delete on BJAZ_LEXUS_WS_DATA to IT_TEAM_DB;
+grant select, insert, update, delete on BJAZ_LEXUS_WS_DATA to OPUS_CORE;
+grant select, insert, update, delete on BJAZ_LEXUS_WS_DATA to READ;
+grant select, insert, update, delete on BJAZ_LEXUS_WS_DATA to WEB_MAINTENANCE;
